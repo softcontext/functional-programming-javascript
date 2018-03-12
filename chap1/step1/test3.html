@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <div id="msg"></div>
+
+    <script type="text/javascript">
+      function echo(message) {
+        return message;
+      }
+
+      function h1(message) {
+        return `<h1>${message}</h1>`;
+      }
+
+      function addToDom(elementId) {
+        let id = `#${elementId}`;
+        return id;
+      }
+
+      function run(id, h1, echo) {
+        return function (message) {
+          document.querySelector(id).innerHTML = h1(echo(message));
+        };
+      }
+
+      var printMessage = run(addToDom('msg'), h1, echo);
+      printMessage('Hello World');
+    </script>
+
+  </body>
+</html>

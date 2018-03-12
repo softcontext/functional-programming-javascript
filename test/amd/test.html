@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      require.config({
+        baseUrl: './js/app',
+        paths: {
+          jquery:'jquery-3.3.1.min',
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <script>
+      require([
+          'jquery', // (1) 위치: "./js/app/jquery-3.3.1.min.js"
+          './test.js', // (2) 위치: "./test.js"
+          'https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.5.6/Rx.min.js'
+      ], function ($, test, Rx) {
+          console.log($);
+          console.log(test);
+          console.log(Rx);
+
+          console.log();
+
+          console.log(test.get()); // 0
+          test.increase();
+          console.log(test.get()); // 1
+      });
+    </script>
+  </body>
+</html>

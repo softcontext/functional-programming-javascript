@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <div id="msg"></div>
+
+    <script type="text/javascript">
+      function printMessage(elementId, format, message) {
+        let id = `#${elementId}`;
+        let html = `<${format}>${message}</${format}>`;
+        document.querySelector(id).innerHTML = html;
+      }
+
+      printMessage('msg', 'h1', 'Hello World');
+    </script>
+
+  </body>
+</html>

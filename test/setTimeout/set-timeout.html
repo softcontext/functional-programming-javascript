@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      setTimeout(()=>{
+        console.log(this);
+        // 브라우저 환경에서는 this 는 window 가 된다.
+        // 노드 환경에서는 this 는 Timeout 이다.
+      }, 500);
+    </script>
+  </body>
+</html>

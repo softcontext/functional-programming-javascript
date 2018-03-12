@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="./lib/ramda.js"></script>
+    <script src="./lib/log4js.js"></script>
+    <script src="./lib/lodash.min.js"></script>
+    <script src="./test2.js"></script>
+  </head>
+  <body>
+    <script>
+    'use strict';
+
+    const logger = function (appender, layout, name, level, message) {
+      const appenders = {
+        'alert': new Log4js.JSAlertAppender(),
+        'console': new Log4js.BrowserConsoleAppender()
+      };
+      const layouts = {
+        'basic': new Log4js.BasicLayout(),
+        'json': new Log4js.JSONLayout(),
+        'xml': new Log4js.XMLLayout()
+      };
+
+      const myAppender = appenders[appender];
+      myAppender.setLayout(layouts[layout]);
+
+      const logger = Log4js.getLogger(name);
+      logger.addAppender(myAppender);
+      logger.log(level, message, null);
+    };
+
+    const debugLog = _.partial(logger, 'console', 'basic', 'MyLogger', 'DEBUG');
+    const debug = R.tap(debugLog);
+
+    const cleanInput = R.compose(normalize, debug, trim);
+    // trim 하고 로깅 출력
+    const isValidSsn = R.compose(debug, checkLengthSsn, debug, cleanInput);
+    // 정제하고 로깅 출력
+    // 길이를 체크하고 로깅 출력
+
+    isValidSsn('444-44-4444');
+    </script>
+  </body>
+</html>
