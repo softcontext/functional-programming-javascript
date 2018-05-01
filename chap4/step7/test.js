@@ -27,7 +27,8 @@ const findObject = R.curry((db, id) => {
 
 const findStudent = findObject(DB('students')); // 연동할 데이터베이스 정보를 준다. (외부 의존항목)
 
-const csv = ({ssn, firstname, lastname}) => `${ssn}, ${firstname}, ${lastname}`; // 인수 해체할당
+// 인수 해체할당
+const csv = ({ssn, firstname, lastname}) => `${ssn}, ${firstname}, ${lastname}`;
 
 const append = R.curry((elementId, info) => {
   // document.querySelector(elementId).innerHTML = info;

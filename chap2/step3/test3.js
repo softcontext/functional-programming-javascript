@@ -14,7 +14,7 @@ var people = [
 function printPeopleInTheUS(people) {
   for (var i = 0; i < people.length; i++) {
     var person = people[i];
-    
+
     // if (person.country === 'US') {
     //   console.log(person);
     // }

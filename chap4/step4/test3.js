@@ -1,5 +1,23 @@
 var _ = require('lodash');
 
+/*
+  https://lodash.com/docs#bind
+  _.bind(func, thisArg, [partials])
+
+    func (Function): The function to bind.
+    thisArg (*): The this binding of func.
+    [partials] (...*): The arguments to be partially applied.
+
+    (Function): Returns the new bound function.
+
+  https://lodash.com/docs#partial
+  _.partial(func, [partials])
+
+    func (Function): The function to partially apply arguments to.
+    [partials] (...*): The arguments to be partially applied.
+
+    (Function): Returns the new partially applied function.
+ */
 const Scheduler = (function () {
   const delayedFn = _.bind(setTimeout, undefined, _, _);
 

@@ -1,21 +1,34 @@
 var _ = require('lodash');
 
-String.prototype.first = _.partial(String.prototype.substring, 0, _); // 인수 _ 기호는 비워둠을 의미
 
-console.log('Functional Programming'.first(3)); // String.prototype.substring(0, 3) 코드와 동일
-console.log('Functional Programming'.first()); // String.prototype.substring(0) 코드와 동일
+String.prototype.first = _.partial(String.prototype.substring, 0, _);
+// 인수 _ 기호는 비워둠을 의미
+
+console.log('Functional Programming'.first(3));
+// Fun
+// String.prototype.substring(0, 3) 코드와 동일
+console.log('Functional Programming'.first());
+// Functional Programming
+// String.prototype.substring(0) 코드와 동일
+
 
 String.prototype.asName = _.partial(String.prototype.replace, /(\w+)\s(\w+)/, '$2, $1');
 
-console.log('Alonzo Church'.asName()); // 'Alonzo Church'.replace(/(\w+)\s(\w+)/, '$2, $1')
+console.log('Alonzo Church'.asName());
+// Church, Alonzo
+// 'Alonzo Church'.replace(/(\w+)\s(\w+)/, '$2, $1') 코드와 같다.
+
 
 String.prototype.explode = _.partial(String.prototype.match, /[\w]/gi);
-// g 플래그가 있으면 매칭된 정보만 얻는다.
+// global 플래그가 있으면 매칭된 정보만 얻는다.
 
-console.log('ABC'.explode()); // 'ABC'.match(/[\w]/gi)
+console.log('ABC'.explode());
+// [ 'A', 'B', 'C' ]
+// 'ABC'.match(/[\w]/gi) 코드와 같다.
 
-if (!String.prototype.parseUrl) { // 충돌여부를 체크하는 방어 로직
-  String.prototype.parseUrl = _.partial(String.prototype.match, /(http[s]?|ftp):\/\/([^:\/\s]+)\.([^:\/\s]{2,5})/);
+if (!String.prototype.parseUrl) { // parseUrl 자원이 존재하지 않을 때 작업을 수행하기 위한 방어 로직
+  String.prototype.parseUrl = _.partial(
+    String.prototype.match, /(http[s]?|ftp):\/\/([^:\/\s]+)\.([^:\/\s]{2,5})/);
 }
 
 console.log('http://example.com'.parseUrl());

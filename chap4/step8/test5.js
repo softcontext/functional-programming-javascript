@@ -19,7 +19,7 @@ function getLetterGrade(score) {
 /*
 fork, join
   조인 함수 1개와 분기 함수 2개를 받는다. 분기 함수들의 결과를 조인함수에 전달하고
-  조인함수의 결과를 반환한다.
+  조인함수의 결과가 반환된다.
  */
 
 const fork = function (join, func1, func2) {

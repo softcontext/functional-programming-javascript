@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+
+  Counter: <span id="counter"></span>
+  <div>
+    <button type="button" onclick="javascript:alert('can be reactive!')">Can i be reactive?</button>
+  </div>
+
+  <script type="text/javascript">
+    function* displayCounter(counter) {
+      const counterSpan = document.querySelector('#counter');
+      counterSpan.textContent = String(counter);
+      yield; // pause
+    }
+
+    function* countUp(start = 0) {
+      while (true) {
+        start++;
+        if (start >= 30) {
+          return;
+        }
+        yield* displayCounter(start);
+      }
+    }
+
+    function run(generatorObject) {
+      if (!generatorObject.next().done) {
+        // Add a new task to the event queue
+        setTimeout(function() {
+          run(generatorObject);
+        }, 1000);
+      }
+    }
+
+    // With the help of run,
+    // we get a (nearly) infinite count-up that
+    // doesn’t block the user interface:
+    run(countUp());
+  </script>
+
+</body>
+
+</html>

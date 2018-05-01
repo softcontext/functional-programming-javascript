@@ -14,7 +14,6 @@ person4.address = new Address('Korea');
 
 var people = person1.peopleInSameCountry([person2, person3, person4]);
 console.log(people);
-
 console.log();
 
 var students = person1.studentsInSameCountryAndSchool([person2, person3, person4]);

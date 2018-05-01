@@ -1,18 +1,22 @@
 var MyModule = (function(exp) { // 지역변수
-  let _myPrivateVar = 'Private';
+  exp = exp || {};
+  
+  let _data = 'Private';
 
-  exp.method1 = function() {
-    return _myPrivateVar;
+  exp.getData = function() {
+    return _data;
   };
 
-  exp.method2 = function(txt) {
-    _myPrivateVar = txt;
+  exp.setData = function(data) {
+    _data = data;
   };
 
   return exp;
 })({});
 
 console.log(MyModule);
-console.log(MyModule.method1());
-MyModule.method2('Changed');
-console.log(MyModule.method1());
+console.log(MyModule.getData());
+
+MyModule.setData('Changed');
+
+console.log(MyModule.getData());

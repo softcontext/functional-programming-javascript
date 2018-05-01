@@ -30,8 +30,6 @@ person7.birthYear = 1909;
 
 var people = [person1, person2, person3, person4, person5, person6, person7];
 
-// console.log(people);
-
 module.exports = {
   Person,
   Student,

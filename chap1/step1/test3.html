@@ -26,6 +26,8 @@
         return function (message) {
           document.querySelector(id).innerHTML = h1(echo(message));
         };
+        // 리턴 함수에서 외부 스코프의 id 문자열, h1, echo 함수를
+        // 사용한다. 따라서, 리턴되는 함수는 클로져 함수다.
       }
 
       var printMessage = run(addToDom('msg'), h1, echo);

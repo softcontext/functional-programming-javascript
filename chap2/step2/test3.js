@@ -14,7 +14,8 @@ person4.address = new Address('Korea');
 
 //-------------------------------------------
 
-var selector = (country, school) => (student) => student.address.country === country && student.school === school;
+var selector = (country, school) =>
+                  (student) => country === student.address.country && school === student.school;
 
 var findStudentsBy = (friends, selector) => friends.filter(selector);
 

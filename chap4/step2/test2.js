@@ -8,11 +8,17 @@ const checkType = R.curry((typeDef, obj) => {
   return obj;
 });
 
+// typeDef 파라미터로 자료형을 대표하는 생성자 함수를 사용한다.
 console.log(checkType(String)('Curry'));
 console.log(checkType(Number)(3));
 console.log(checkType(Number)(3.5));
 
-let now = new Date();
-console.log(checkType(Date)(now));
+console.log(checkType(Date)(new Date()));
 console.log(checkType(Object)({}));
-console.log(checkType(String)(42)); // TypeError
+
+try {
+  console.log(checkType(String)(42)); // TypeError
+} catch (e) {
+  console.log(e.message);
+  // 형식 불일치: [function String() { [native code] }] 이어야 하는데, [number] 입니다.
+}

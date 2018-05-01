@@ -14,12 +14,45 @@ console.log(found);
 // '.1' was the last value captured by '(\.\d)'.
 // The 'index' property (22) is the zero-based index of the whole match.
 // The 'input' property is the original string that was parsed.
+console.log();
 
 console.log('ABC'.match(/[\w]/gi)); // g 플래그가 있으면 매칭된 정보만 얻는다.
+// [ 'A', 'B', 'C' ]
+console.log();
 
-var str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+var str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!';
 var regexp = /[A-E]/gi;
 var matches_array = str.match(regexp);
 
 console.log(matches_array);
 // ['A', 'B', 'C', 'D', 'E', 'a', 'b', 'c', 'd', 'e']
+console.log();
+
+console.log(str.match(/.{1,2}/g));
+// [ 'AB',
+//   'CD',
+//   'EF',
+//   'GH',
+//   'IJ',
+//   'KL',
+//   'MN',
+//   'OP',
+//   'QR',
+//   'ST',
+//   'UV',
+//   'WX',
+//   'YZ',
+//   'ab',
+//   'cd',
+//   'ef',
+//   'gh',
+//   'ij',
+//   'kl',
+//   'mn',
+//   'op',
+//   'qr',
+//   'st',
+//   'uv',
+//   'wx',
+//   'yz',
+//   '!' ]

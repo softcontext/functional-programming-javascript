@@ -44,7 +44,7 @@ console.log(grades instanceof Node); // true
 /*
 먼 길을 돌았지만,
 R.type으로 자료형이 일치하는지 체크하는 것이 맞다.
-다만 console.log(R.is(Tuple, grades)); // false 이므로
+다만, console.log(R.is(Tuple, grades)); // false 이므로
 미리 선언한 자료형으로 체크할 수 없는게 문제다.
 이에 대한 해결책은 무엇인가? 자료형의 체크는 꼭 하고 싶다.
  */

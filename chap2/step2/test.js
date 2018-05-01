@@ -6,6 +6,7 @@ class Person {
     this._address = null;
     this._birthYear = null;
   }
+
   get firstname(){
     return this._firstname;
   }
@@ -21,12 +22,14 @@ class Person {
   get birthYear(){
     return this._birthYear;
   }
+
   set address(address){
     return this._address = address;
   }
   set birthYear(birthYear){
     return this._birthYear = birthYear;
   }
+  
   toString() {
     return `Person(${this._firstname}, ${this._lastname})`;
   }

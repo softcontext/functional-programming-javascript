@@ -15,6 +15,7 @@ function printPeople(people, selector, printer) {
   people.forEach(person => selector(person) && printer(person));
 }
 
-const inCountry = country => person => person.country === country;
+const inCountry = country =>
+                    person => country === person.country;
 
 printPeople(people, inCountry('US'), console.log);

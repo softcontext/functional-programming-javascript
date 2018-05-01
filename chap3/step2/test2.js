@@ -18,27 +18,3 @@ var result = _.chain(names)
   .value();
 
 console.log(result);
-
-// var result = [];
-//
-// for (var i = 0; i < names.length; i++) {
-//   var n = names[i];
-//
-//   if (n !== undefined && n !== null) {
-//     var ns = n.replace(/_/, ' ').split(' ');
-//
-//     for (var j = 0; j < ns.length; j++) {
-//       var p = ns[j];
-//       p = p.charAt(0).toUpperCase() + p.slice(1);
-//       ns[j] = p;
-//     }
-//
-//     if (result.indexOf(ns.join(' ')) < 0) {
-//       result.push(ns.join(' '));
-//     }
-//   }
-// }
-//
-// result.sort(); // 정렬
-//
-// console.log(result);

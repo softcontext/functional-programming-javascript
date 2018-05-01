@@ -2,7 +2,6 @@ const R = require('ramda');
 
 /*
 http://ramdajs.com/docs/#curry
-
   var addFourNumbers = (a, b, c, d) => a + b + c + d;
 
   var curriedAddFourNumbers = R.curry(addFourNumbers);
@@ -14,8 +13,9 @@ http://ramdajs.com/docs/#is
 See if an object (val) is an instance of the supplied constructor.
 This function will check up the inheritance chain, if any.
  */
-const checkType = R.curry((typeDef, obj) => { // 전달되는 cb은 인수를 모두 받을 때 기동한다.
-  if (!R.is(typeDef, obj)) { // obj는 typeDef자료형인지 체크한다.
+const checkType = R.curry((typeDef, obj) => {
+  // 전달되는 cb은 인수를 모두 받을 때 기동한다.
+  if (!R.is(typeDef, obj)) { // obj가 typeDef자료형인지 체크한다.
     let type = typeof obj;
     throw new TypeError(`형식 불일치: [${typeDef}]이어야 하는데, [${type}]입니다.`);
   }
@@ -33,13 +33,15 @@ ReferenceError 객체는 존재하지 않는 변수를 참조했을 때 발생�
 // console.log(this === exports); // true
 
 const Tuple = function (...typeInfo) {
+  // 고정된 typeInfo 배열 [Boolean, String]의 값을 사용하는 함수 _T를 리턴한다.
+
   const _T = function (...values) {
     if (values.some(val => val === null || val === undefined)) {
       throw new ReferenceError('튜플은 null 값을 가질 수 없습니다.');
     }
 
     if (values.length !== typeInfo.length) {
-      throw new ReferenceError('튜플 항수(자료형 및 개수)가 프로토타입과 맞지 않습니다.');
+      throw new ReferenceError('튜플 항수(인수의 개수)가 프로토타입과 맞지 않습니다.');
     }
 
     values.forEach((val, index) => {
@@ -48,11 +50,11 @@ const Tuple = function (...typeInfo) {
       // 튜플의 인덱스는 1부터 시작한다.
     });
 
-    Object.freeze(this); // 불변 객체로 설정한다. writable, configurable 설정이 false가 된다.
+    Object.freeze(this);
+    // 불변 객체로 설정한다. writable, configurable 설정이 false가 된다.
   };
 
-  // console.log(this === global); // true
-
+  // 다음과 같은 책 소스코드를 그대로 사용하면 안된다.
   // _T.prototype.values = () => {
   //   // console.log(this === global); // true
   //   return Object.keys(this).map(k => this[k], this);
@@ -62,11 +64,19 @@ const Tuple = function (...typeInfo) {
     객체에 메소드를 추가할 때 주의사항:
     메소드 내 this 키워드를 사용한다면 lexical scope 임을 명심해야 한다.
     애로우 함수내 this는 가까운 스코프로 자동 바인딩 됨에 따라 this는 global이 된다.
+    console.log(this === global); // true
     명백히 의도한 결과가 아니므로 코드를 다음처럼 변경해야 한다.
    */
 
   _T.prototype.values = function () {
     return Object.keys(this).map(k => this[k], this);
+    /*
+      Array.prototype.map(function callback(currentValue[, index[, array]]) {
+        // new_array의 새 요소 반환
+      }[, thisArg])
+
+      thisArg: 선택항목, callback을 실행할 때 this로 사용되는 값
+     */
   };
 
   return _T;

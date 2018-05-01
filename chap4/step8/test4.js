@@ -26,8 +26,9 @@ sequence(S 조합기)
   차례로 수행할 뿐 결과를 반환하지 않는다. 합성 중간에 끼워 넣고 싶으면 R.tap으로 감싸야 한다.
  */
 
-const seq = function () {
-  const funcs = Array.prototype.slice.call(arguments);
+const seq = function (...funcs) {
+  // const funcs = Array.prototype.slice.call(arguments);
+  
   return function (val) {
     funcs.forEach(function (fn) {
       fn(val);

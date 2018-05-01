@@ -6,6 +6,7 @@ class Person {
     this._address = null;
     this._birthYear = null;
   }
+
   get firstname(){
     return this._firstname;
   }
@@ -21,17 +22,19 @@ class Person {
   get birthYear(){
     return this._birthYear;
   }
+
+  get fullname() {
+    return [this.firstname, this.lastname].join(' ');
+  }
   set address(address){
     return this._address = address;
   }
   set birthYear(birthYear){
     return this._birthYear = birthYear;
   }
-  get fullname() {
-    return [this.firstname, this.lastname].join(' ');
-  }
+
   toString() {
-    return `Person(${this._firstname}, ${this._lastname})`;
+    return `Person {${this._firstname}, ${this._lastname}, ${this._ssn}, ${this._address}, ${this._birthYear}}`;
   }
 
   peopleInSameCountry(friends){
@@ -51,6 +54,7 @@ class Student extends Person {
     super(firstname, lastname, ssn);
     this._school = school;
   }
+  
   get school(){
     return this._school;
   }

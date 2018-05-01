@@ -3,6 +3,7 @@ class Person {
     this._firstname = firstname;
     this._lastname = lastname;
     this._ssn = ssn;
+
     this._address = null;
     this._birthYear = null;
   }
@@ -15,23 +16,27 @@ class Person {
   get ssn(){
     return this._ssn;
   }
+
   get address(){
     return this._address;
   }
   get birthYear(){
     return this._birthYear;
   }
+
+  get fullname() {
+    return [this.firstname, this.lastname].join(' ');
+  }
+
   set address(address){
     return this._address = address;
   }
   set birthYear(birthYear){
     return this._birthYear = birthYear;
   }
-  get fullname() {
-    return [this.firstname, this.lastname].join(' ');
-  }
+
   toString() {
-    return `Person(${this._firstname}, ${this._lastname})`;
+    return `Person {${this._firstname}, ${this._lastname}}`;
   }
 
   peopleInSameCountry(friends){
@@ -49,14 +54,17 @@ class Person {
 class Student extends Person {
   constructor(firstname, lastname, ssn, school){
     super(firstname, lastname, ssn);
+
     this._school = school;
   }
+
   get school(){
     return this._school;
   }
 
   studentsInSameCountryAndSchool(friends){
     var closeFriends = super.peopleInSameCountry(friends);
+
     var result = [];
     for (let idx in closeFriends) {
       var friend = closeFriends[idx];

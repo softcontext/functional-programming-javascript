@@ -12,12 +12,16 @@ function getUser() {
 }
 
 /*
-빈 값을 확인하지 않는 상태로 메소드를 연결해 호출하면 객체가 null을 반환할 때 TypeErrors가 발생할 수 있다.
+빈 값을 확인하지 않는 상태로 메소드를 연결해 호출하면
+객체가 null을 반환할 때 TypeErrors가 발생할 수 있다.
+메소드 리턴이 null이 아님을 확인하기 위해서
+메소드마다 조건문을 두어 해결할 수 있지만 이는 매우 번거로운 일이다.
  */
 
 try {
   var url = getUser().getAvatar().url;
-  console.log(url); // 여기는 절대 실행되지 않음
+  console.log(url); // 여기 코드는 실행되지 않는다.
 } catch (e) {
-  console.log(e); // TypeError: Cannot read property 'url' of null
+  console.log(e);
+  // TypeError: Cannot read property 'url' of null
 }

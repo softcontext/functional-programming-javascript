@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+
+  Counter: <span id="counter"></span>
+
+  <script type="text/javascript">
+    /*
+    If you ran this function, it would completely block the user interface thread
+    in which it runs and its tab would become unresponsive.
+
+    function countUp(start = 0) {
+      const counterSpan = document.querySelector('#counter');
+      while (true) {
+        counterSpan.textContent = String(start);
+        start++;
+      }
+    }
+    */
+
+    // Let’s implement the same functionality via a generator that
+    // periodically pauses via yield
+    function* countUp(start = 0) {
+      const counterSpan = document.querySelector('#counter');
+      while (true) {
+        counterSpan.textContent = String(start);
+        start++;
+        yield; // pause
+      }
+    }
+  </script>
+
+</body>
+
+</html>

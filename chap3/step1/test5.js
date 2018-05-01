@@ -1,13 +1,14 @@
 var _ = require('lodash');
+
 var {Person, Student, Address, people} = require('../model/data');
 var persons = require('../model/data').people;
 
 const bornIn1903 = person => person.birthYear === 1903;
 const fullname = person => person.fullname;
+const upper = str => str.toUpperCase();
 
-var result = _(persons).filter(bornIn1903).map(fullname).join(' and ');
+var result = _(persons).filter(bornIn1903).map(fullname).map(upper).join(' and ');
 console.log(result);
-
 console.log();
 
 /*

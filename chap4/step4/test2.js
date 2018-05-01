@@ -29,14 +29,17 @@ function partial() {
   return bound;
 }
 
-// String.prototype.first = _.partial(String.prototype.substring, 0, _); 코드와 동일
 String.prototype.first = partial(String.prototype.substring, 0);
+// String.prototype.first = _.partial(String.prototype.substring, 0, _); 코드와 동일
 
 console.log('Functional Programming'.first(3));
+// Fun
 // String.prototype.substring(0, 3) 코드와 동일
 
-// String.prototype.asName = _.partial(String.prototype.replace, /(\w+)\s(\w+)/, '$2, $1');
 String.prototype.asName = partial(String.prototype.replace, /(\w+)\s(\w+)/, '$2, $1');
+// String.prototype.asName = _.partial(
+//  String.prototype.replace, /(\w+)\s(\w+)/, '$2, $1'); 코드와 동일
 
 console.log('Alonzo Church'.asName());
- // 'Alonzo Church'.replace(/(\w+)\s(\w+)/, '$2, $1') 코드와 동일
+// Church, Alonzo
+// 'Alonzo Church'.replace(/(\w+)\s(\w+)/, '$2, $1') 코드와 동일

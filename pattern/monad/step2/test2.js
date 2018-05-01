@@ -1,37 +1,44 @@
 /*
-Continuation 모나드는 비동기 일감에서 사용한다.
-ES6에서는 다행히 직접 구현할 필요가 없다. Promise 객체가 이 모나드의 구현이기 때문이다.
-
-    Promise.resolve(value)
-    값을 감싸고 pormise를 반환. (unit 함수의 역할)
-    Promise.prototype.then(onFullfill: value => Promise)
-    함수를 인자로 받아 값을 다른 promise로 전달하고 promise를 반환. (bind 함수의 역할)
-
-다음 코드에서는 Unit 함수로 Promise.resolve(value)를 활용했고,
-Bind 함수로 Promise.prototype.then을 활용했다.
+bind 함수는 리스트의 요소를 하나씩 꺼내서 제너레이터 함수인 transform 함수에
+전달하고 transform 함수에서 yield 하는 모든 값을 재 yield 한다.
  */
 
-var result = Promise.resolve(5)
-  .then(function(value) {
-    return Promise.resolve(6)
-      .then(function(value2) {
-        return value + value2;
-      });
-  });
-
-result.then(function(value) {
-  console.log(value);
-});
+function* bind(list, transform) {
+  for (var item of list) {
+    yield* transform(item);
+  }
+}
 
 /*
-Promise는 기본적인 continuation 모나드에 여러가지 확장을 제공한다.
-만약 then이 promise 객체가 아닌 간단한 값을 반환하면
-이 값을 Promise 처리가 완료된 값과 같이 감싸 모나드 내에서 사용할 수 있다.
-
-두번째 차이점은 에러 전파에 대해 거짓말을 한다는 점이다.
-Continuation 모나드는 연산 사이에서 하나의 값만 전달할 수 있다.
-반면 Promise는 구별되는 두 값을 전달하는데 하나는 성공 값이고 다른 하나는 에러를 위해 사용한다.
-(Either 모나드와 유사하다.)
-에러는 then 메소드의 두번째 콜백으로 포착할 수 있으며
-또는 이를 위해 제공되는 특별한 메소드 .catch를 사용할 수 있다.
+다음 예제는 지연을 통해 두 배열의 요소의 합을 만드는 과정을 어떻게 작성하는지 보여준다.
  */
+
+// cb 함수에 배열 요소를 전달하면서 함수 실행결과를 리턴받으면 yield 한다.
+var result = bind([10, 20, 30], function(item1) {
+  console.log('--------------', item1);
+
+  return bind([1, 2, 3], function* (item2) {
+    console.log('----------------------------', item2);
+    yield item1 + item2;
+  });
+});
+
+// for (var value of result) {
+//   console.log('value =', value);
+// }
+
+console.log([...result]);
+console.log();
+
+/*
+List 모나드는 다수의 값을 취급하는 리스트에서 지연된 연산이 가능함을 나타낸다.
+이 모나드의 unit 함수는 받은 값을 바로 yield 하는 generator 를 반환한다.
+ */
+
+function* unit(value) {
+  console.log('to do something with ' + value);
+  yield value;
+}
+
+var some = bind([10, 20, 30], unit);
+console.log([...some]);
